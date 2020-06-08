@@ -34,9 +34,6 @@ psql -d template1 -U postgres -c "ALTER USER ${USER} WITH PASSWORD '${PASS}';"
 # Connect as superuser to gitlab db and enable pg_trgm extension
 psql -U postgres -d ${DB} -c "CREATE EXTENSION IF NOT EXISTS pg_trgm;"
 
-# Fix permission for postgres 
-echo "listen_addresses = '*'" >> /usr/local/pgsql/data/postgresql.conf
-echo "host  all  all 0.0.0.0/0 md5" >> /usr/local/pgsql/data/pg_hba.conf
 
 # Restart postgresql after config change
 service postgresql restart
@@ -79,7 +76,7 @@ chown -R git:git /usr/local/share/gitlab-shell
 chown -R git:git /usr/local/www/gitlab-ce
 
 # remove the old Gemfile.lock to avoid problems with new gems
-rm Gemfile.lock
+rm -f Gemfile.lock
 
 # Run database migrations
 su -l git -c "cd /usr/local/www/gitlab-ce && echo "yes" | rake gitlab:setup RAILS_ENV=production"
