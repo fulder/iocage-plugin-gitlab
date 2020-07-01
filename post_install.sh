@@ -66,6 +66,7 @@ chmod 2770 /usr/local/git/repositories
 # Set the hostname for gitlab instance
 if [ -n "$IOCAGE_PLUGIN_IP" ] ; then
   sed -i '' "s|host: localhost|host: ${IOCAGE_PLUGIN_IP}|g" /usr/local/www/gitlab-ce/config/gitlab.yml
+  sed -i '' "s|https://_change_to_gitlab_url_|${IOCAGE_PLUGIN_IP}|g" /usr/local/gitaly/config.toml
 fi
 
 # Set db password for gitlab
