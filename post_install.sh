@@ -2,7 +2,6 @@
 
 # Enable the service
 sysrc -f /etc/rc.conf gitlab_enable=YES
-sysrc -f /etc/rc.conf gitlab_pages_enable="YES"
 sysrc -f /etc/rc.conf postgresql_enable="YES"
 sysrc -f /etc/rc.conf redis_enable=YES
 sysrc -f /etc/rc.conf nginx_enable=YES
@@ -114,8 +113,6 @@ echo "Starting nginx..."
 service nginx start
 echo "Starting gitlab..."
 service gitlab start
-echo "Starting gltlab pages..."
-service gitlab_pages start
 echo "Starting sshd..."
 service sshd start
 
